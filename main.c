@@ -2,269 +2,186 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio2.h>
- char tablerito[9]= "";
- int ocupado[9],x[9],O[9],y;
+
+ int ocupado[9],x[9],O[9],y,ficha_elegida,ficha_ocupada,eleccion,lugar_ocupado[9],tablerito[9],Ganador_x,Ganador_O,Terminar_juego=1;
+
 int main()
 {
 int z,respuesta;
 
-
-
-printf(Imprimir_Tablero());
-
-
-
-
-
-
-
-}
-void EmpateTateti()
+while(Terminar_juego==1)
 {
-     if(x[1]==x[2] || x[1]==x[0] || x[5]==x[2])
-    {
-        for(y=0;y<3;y++)
-        {
-            if(ocupado[y]==0)
-            {
-                tablerito[y]='O';
-                return 1;
-            }
-        }
-    }
-     if(x[4]==x[5] || x[3]==x[4] || x[5]==x[3])
-    {
-        for(y=0;y<3;y++)
-        {
-            if(ocupado[y+3]==0)
-            {
-                tablerito[y+3]='O';
-                return 1;
-            }
-        }
-    }
-     if(x[8]==x[7] || x[6]==x[7] || x[6]==x[8])
-    {
-        for(y=0;y<3;y++)
-        {
-            if(ocupado[y+6]==0)
-            {
-                tablerito[y+6]='O';
-                return 1;
-            }
-        }
-    }
-     if(x[6]==x[3] || x[0]==x[3] || x[0]==x[6])
-    {
-        for(y=0;y<3;y=y+3)
-        {
-            if(ocupado[y]==0)
-            {
-                tablerito[y]='O';
-                return 1;
-            }
-        }
-    }
-     if(x[4]==x[7] || x[1]==x[4] || x[1]==x[7])
-    {
-        for(y=0;y<3;y=y+3)
-        {
-            if(ocupado[y]==0)
-            {
-                tablerito[y]='O';
-                return 1;
-            }
-        }
-    }
-     if(x[5]==x[8] || x[2]==x[5] || x[2]==x[8])
-    {
-        for(y=0;y<3;y=y+3)
-        {
-            if(ocupado[y]==0)
-            {
-                tablerito[y]='O';
-                return 1;
-            }
-        }
-    }
+Imprimir_tablerito();
+Elegir_tipo_ficha();
+Ganador_tateti();
+Imprimir_Ganador_X();
+Imprimir_Ganador_O();
+Empate_tateti();
+}
 }
 
-int GanadorTateti()
+
+int Elegir_tipo_ficha()
 {
-    if(O[1]==O[0] || O[1]==O[2] || O[0]==O[2])
-    {
-        for(y=0;y<3;y++)
-        {
-            if(ocupado[y]==0)
-            {
-                tablerito[y]='O';
-                return 1;
-            }
-        }
-    }
-  if(O[3]==O[4] || O[4]==O[5] || O[5]==O[3])
-    {
-        for(y=0;y<3;y++)
-        {
-            if(ocupado[y+3]==0)
-            {
-                tablerito[y+3]='O';
-                return 1;
-            }
-        }
-    }
-     if(O[6]==O[7] || O[8]==O[7] || O[6]==O[8])
-    {
-        for(y=0;y<3;y++)
-        {
-            if(ocupado[y+6]==0)
-            {
-                tablerito[y+6]='O';
-                return 1;
-            }
-        }
-    }
-     if(O[6]==O[3] || O[0]==O[6] || O[0]==O[3])
-    {
-        for(y=0;y<9;y=y+3)
-        {
-            if(ocupado[y+3]==0)
-            {
-                tablerito[y+3]='O';
-                return 1;
-            }
-        }
-    }
-     if(O[1]==O[4] || O[1]==O[7] || O[4]==O[7])
-    {
-        for(y=0;y<9;y=y+3)
-        {
-            if(ocupado[y+3]==0)
-            {
-                tablerito[y+3]='O';
-                return 1;
-            }
-        }
-    }
-     if(O[2]==O[5] || O[2]==O[8] || O[5]==O[8])
-    {
-        for(y=0;y<9;y=y+3)
-        {
-            if(ocupado[y+3]==0)
-            {
-                tablerito[y]='O';
-                return 1;
-            }
-        }
-    }
-     if(O[4]==O[8] || O[0]==O[8] || O[0]==O[4])
-    {
-        for(y=0;y<9;y=y+4)
-        {
-            if(ocupado[y]==0)
-            {
-                tablerito[y]='O';
-                return 1;
-            }
-        }
-    }
-     if(O[4]==O[6] || O[2]==O[4] || O[2]==O[6])
-    {
-        for(y=0;y<9;y=y+2)
-        {
-            if(ocupado[y+3]==0)
-            {
-                tablerito[y+3]='O';
-                return 1;
-            }
-        }
-    }
+    printf("Posiciones:\n Si desea jugar X ingrese 1\n Si desea jugar O ingrese 2\n");
+    scanf("%d",& ficha_elegida);
 
+  if(ficha_elegida==1)
+       {
+         Jugada_tablerito();
 
+         if(lugar_ocupado[eleccion-1]==0)
+         {
+           tablerito[(eleccion-1)] = 'X';
+           lugar_ocupado[eleccion-1]=1;
+         }
 
+       }
 
-
-
-
-
-
-
-
-
+       if(ficha_elegida==2)
+       {
+         Jugada_tablerito();
+         if(lugar_ocupado[eleccion-1]==0)
+         {
+           tablerito[(eleccion-1)] = 'O';
+           lugar_ocupado[eleccion-1]=2;
+         }
+       }
 }
+int Jugada_tablerito()
+{
+    eleccion=0;
+    while(eleccion<1 || eleccion>9)
+    {
+       printf("Elija una posicion del 1 al 9 para jugar la ficha\n");
+       scanf("%d",&eleccion);
+       if(eleccion<1 || eleccion>9)
+       {
+           printf("Elija un lugar valido para poner la ficha\n");
+       }
+    }
 
-int Imprimir_Tablero()
-{
-    int z,respuesta;
-for(z=0;z<9;z++)
-{
-    x[z]=z+1;O[z]=z+1;
-    ocupado[z]=0;
+ return eleccion-1;
 }
- z=0;
- while(z<5)
- {
-     if(z%2==0)
-     {
-         //tablero
+void Imprimir_tablerito()
+{
+     //tablerito
          system("cls");
      printf(" %c | %c | %c\n-----------\n",tablerito[0],tablerito[1],tablerito[2]);
      printf(" %c | %c | %c\n-----------\n",tablerito[3],tablerito[4],tablerito[5]);
-     printf(" %c | %c | %c\n",tablerito[6],tablerito[7],tablerito[8]);
- gotoxy(1,7);
-     printf("Ingrese un N° entre 1 y 9 para marcar la x en el casillero deseado");
-     printf("Casillero= ");scanf("%d",&respuesta);
-     if(ocupado[respuesta-1]==0 && respuesta>0 && respuesta<10)
-     {
-         tablerito[respuesta-1]='X';ocupado[respuesta-1]=1;
-         x[respuesta-1]=13;z++;
-     }
-     }
- else
- {
-  system("cls");
-   printf(" %c | %c | %c\n-----------\n",tablerito[0],tablerito[1],tablerito[2]);
-   printf(" %c | %c | %c\n-----------\n",tablerito[3],tablerito[4],tablerito[5]);
-   printf(" %c | %c | %c\n",tablerito[6],tablerito[7],tablerito[8]);
- gotoxy(1,7);
-     printf("Ingrese un N° entre 1 y 9 para marcar la O en el casillero deseado");
-     printf("Casillero= ");scanf("%d",&respuesta);
-     if(ocupado[respuesta-1]==0 && respuesta>0 && respuesta<10)
-     {
-         tablerito[respuesta-1]='O';ocupado[respuesta-1]=1;
-         O[respuesta-1]=14;z++;
-     }
- }
- GanadorTateti();
- if (GanadorTateti()==1)
-{
+     printf(" %c | %c | %c\n\n",tablerito[6],tablerito[7],tablerito[8]);
+
 }
-else
+int Ganador_tateti()
 {
-    EmpateTateti();
+    //A partir de la siguiente linea es para el ganador en el caso de X
+    if(lugar_ocupado[0]==1 && lugar_ocupado[1]==1 && lugar_ocupado[2]==1 )
+    {
+      Ganador_x=1;
+    }
+    if(lugar_ocupado[3]==1 && lugar_ocupado[4]==1 && lugar_ocupado[5]==1 )
+    {
+      Ganador_x=1;
+    }
+    if(lugar_ocupado[6]==1 && lugar_ocupado[7]==1 && lugar_ocupado[8]==1 )
+    {
+      Ganador_x=1;
+    }
+    if(lugar_ocupado[0]==1 && lugar_ocupado[3]==1 && lugar_ocupado[6]==1 )
+    {
+      Ganador_x=1;
+    }
+    if(lugar_ocupado[1]==1 && lugar_ocupado[4]==1 && lugar_ocupado[7]==1 )
+    {
+      Ganador_x=1;
+    }
+    if(lugar_ocupado[2]==1 && lugar_ocupado[5]==1 && lugar_ocupado[8]==1 )
+    {
+      Ganador_x=1;
+    }
+    if(lugar_ocupado[0]==1 && lugar_ocupado[4]==1 && lugar_ocupado[8]==1 )
+    {
+      Ganador_x=1;
+    }
+    if(lugar_ocupado[2]==1 && lugar_ocupado[4]==1 && lugar_ocupado[6]==1 )
+    {
+      Ganador_x=1;
+    }
+
+//A partir de la siguiente linea es para el ganador en el caso de O
+if(lugar_ocupado[0]==2 && lugar_ocupado[1]==2 && lugar_ocupado[2]==2 )
+    {
+      Ganador_O=1;
+    }
+    if(lugar_ocupado[3]==2 && lugar_ocupado[4]==2 && lugar_ocupado[5]==2 )
+    {
+      Ganador_O=1;
+    }
+    if(lugar_ocupado[6]==2 && lugar_ocupado[7]==2 && lugar_ocupado[8]==2 )
+    {
+     Ganador_O=1;
+    }
+    if(lugar_ocupado[0]==2 && lugar_ocupado[3]==2 && lugar_ocupado[6]==2 )
+    {
+      Ganador_O=1;
+    }
+    if(lugar_ocupado[1]==2 && lugar_ocupado[4]==2 && lugar_ocupado[7]==2 )
+    {
+      Ganador_O=1;
+    }
+    if(lugar_ocupado[2]==2 && lugar_ocupado[5]==2 && lugar_ocupado[8]==2 )
+    {
+      Ganador_O=1;
+    }
+    if(lugar_ocupado[0]==2 && lugar_ocupado[4]==2 && lugar_ocupado[8]==2 )
+    {
+      Ganador_O=1;
+    }
+    if(lugar_ocupado[2]==2 && lugar_ocupado[4]==2 && lugar_ocupado[6]==2 )
+    {
+      Ganador_O=1;
+    }
+
 }
-//empate
+void Imprimir_Ganador_X()
+{
+    if (Ganador_x==1)
+{
+      system("cls");
+     printf(" %c | %c | %c\n-----------\n",tablerito[0],tablerito[1],tablerito[2]);
+     printf(" %c | %c | %c\n-----------\n",tablerito[3],tablerito[4],tablerito[5]);
+     printf(" %c | %c | %c\n\n",tablerito[6],tablerito[7],tablerito[8]);
+    printf("El ganador del partido es la X\n");
+    Terminar_juego=0;
+}
+
+}
+void Imprimir_Ganador_O()
+{
+    if(Ganador_O==1)
+    {
+          system("cls");
+     printf(" %c | %c | %c\n-----------\n",tablerito[0],tablerito[1],tablerito[2]);
+     printf(" %c | %c | %c\n-----------\n",tablerito[3],tablerito[4],tablerito[5]);
+     printf(" %c | %c | %c\n\n",tablerito[6],tablerito[7],tablerito[8]);
+    printf("El ganador del partido es el O\n");
+    Terminar_juego=0;
+    }
+}
+void Empate_tateti()
+{
+    if(tablerito[0]!=0 && tablerito[1]!=0 && tablerito[2]!=0 && tablerito[3]!=0 && tablerito[4]!=0 && tablerito[5]!=0 && tablerito[6]!=0 && tablerito[7]!=0 && tablerito[8]!=0 )
+    {
         system("cls");
-
-   printf(" %c | %c | %c\n-----------\n",tablerito[0],tablerito[1],tablerito[2]);
-   printf(" %c | %c | %c\n-----------\n",tablerito[3],tablerito[4],tablerito[5]);
-   printf(" %c | %c | %c\n",tablerito[6],tablerito[7],tablerito[8]);
- }
-    return 0;
+    printf(" %C | %C | %C\n", tablerito[0], tablerito[1], tablerito[2]);
+    printf("---|---|---\n");
+    printf(" %C | %C | %C\n", tablerito[3], tablerito[4], tablerito[5]);
+    printf("---|---|---\n");
+    printf(" %C | %C | %C\n\n", tablerito[6], tablerito[7], tablerito[8]);
+    printf("Hubo un empate en el partido\n");
+    Terminar_juego=0;
+    }
 }
-{}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
